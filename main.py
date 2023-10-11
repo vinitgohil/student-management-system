@@ -29,6 +29,7 @@ class MainWindow(QMainWindow):
 		help_menu_item.addAction(about_action)
 		# for mac users only
 		about_action.setMenuRole(QAction.MenuRole.NoRole)
+		about_action.triggered.connect(self.about)
 
 		search_action = QAction(QIcon("icons/search.png"),"Search", self)
 		edit_menu_item.addAction(search_action)
@@ -98,6 +99,21 @@ class MainWindow(QMainWindow):
 	def delete(self):
 		dialog = DeleteDialog()
 		dialog.exec()
+
+	def about(self):
+		dialog = AboutDialog()
+		dialog.exec()
+
+
+class AboutDialog(QMessageBox):
+	def __init__(self):
+		super(AboutDialog, self).__init__()
+		self.setWindowTitle("About")
+		content = """
+		This Application was created as part of a learning with Object Orientated Programming.
+		Developed by V.Gohil (2023). Open to amendments and reuse.
+		"""
+		self.setText(content)
 
 
 class InsertDialog(QDialog):
